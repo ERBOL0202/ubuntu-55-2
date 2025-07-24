@@ -27,14 +27,25 @@ def main(page: ft.Page):
         
         print(greeting_text.value)
         page.update()
+
     def clear_history(_):
         greeting_text.clear
         page.update
         clear_button = ft.IconButton()
     name_input = ft.TextField(label="Введите имя: on_sumbit=on_button_click")
     greet_button = ft.ElevatedButton("sell again", on_click=on_button_click)
+    def theme_mode():
+        if page.theme_mode == ft.ThemeMode.LIGHT:
+            page.theme_mode = ft.ThemeMode.DARK
+        else:
+            page.theme_mode = ft.ThemeMode.LIGHT
+        page.update()
 
-    page.add(greeting_text, name_input, greet_button, history_text)
+
+    #page.add(greeting_text, name_input, greet_button, history_text)
+    page.add(ft.Row([theme_mode, clear_button], alignment=ft.MainAxisAlignment.CENTER), greeting_text,
+             ft.Row([name_input, greet_button], alignment=ft.MainAxisAlignment.END), 
+             ft.Row([history_text], alignment=ft.MainAxisAlignment.CENTER))
 
 
 ft.app(target=main)
